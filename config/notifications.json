@@ -1,0 +1,15 @@
+{
+    "enabled": false,
+    "schedule": {
+        "daily_time": "10:00",
+        "weekly_day": 1,
+        "use_daily": true
+    },
+    "types": {
+        "role_changes": true,
+        "new_users": true,
+        "system_events": true,
+        "errors": true
+    },
+    "recipients": []
+}
