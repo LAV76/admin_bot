@@ -88,7 +88,7 @@
 
 1. **Клонировать репозиторий**:
    ```bash
-   git clone [<URL-репозитория>](https://github.com/LAV76/admin_bot.git)
+   git clone https://github.com/LAV76/admin_bot.git
    cd admin_chat
    ```
 
