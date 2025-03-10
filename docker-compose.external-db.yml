@@ -1,0 +1,13 @@
+services:
+  bot:
+    build: .
+    container_name: telegram_admin_bot
+    restart: unless-stopped
+    network_mode: host  # Используем сеть хоста для доступа к локальной БД
+    volumes:
+      - ./.env:/app/.env  # Монтируем .env файл из хост-системы
+      - ./logs:/app/logs  # Монтируем логи для сохранения на хосте
+    environment:
+      - TZ=Europe/Moscow  # Настройка временной зоны
+    # Важно: В .env файле должны быть указаны правильные параметры подключения 
+    # к внешней базе данных (DB_HOST, DB_PORT, DB_USER, DB_PASS, DB_NAME) 

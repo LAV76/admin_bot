@@ -1,0 +1,37 @@
+services:
+  bot:
+    build: .
+    container_name: telegram_admin_bot
+    restart: unless-stopped
+    volumes:
+      - ./.env:/app/.env  # Монтируем .env файл из хост-системы
+      - ./logs:/app/logs  # Монтируем логи для сохранения на хосте
+    depends_on:
+      - postgres
+    environment:
+      - TZ=Europe/Moscow  # Настройка временной зоны
+    networks:
+      - bot_network
+
+  postgres:
+    image: postgres:14-alpine
+    container_name: telegram_bot_postgres
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Постоянное хранилище для данных
+    environment:
+      - POSTGRES_PASSWORD=postgres  # Фиксированный пароль для тестирования
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=tgbot_admin
+    ports:
+      - "5432:5432"  # Открываем порт для доступа к БД с хоста
+    networks:
+      - bot_network
+
+volumes:
+  postgres_data:
+    name: telegram_bot_postgres_data
+
+networks:
+  bot_network:
+    name: telegram_bot_network 
